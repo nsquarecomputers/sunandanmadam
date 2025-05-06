@@ -74,34 +74,48 @@
     </div>
 </body>
 <script>
-    function loadCart() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartDiv = document.getElementById('cartItems');
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        if (cart.length === 0) {
-            cartDiv.innerHTML = '<h3>Your cart is empty.</h3>';
-            return;
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    // Combine all cart items into a single line (without price)
+    const productSummary = cart.map(item => 
+        `${item.name} (x${item.quantity})`  // No price, only name and quantity
+    ).join(", ");
+
+    // Ensure we send an array with a proper object structure
+    const orderData = {
+        Product: productSummary  // Ensure this matches your Google Sheet column
+    };
+
+    console.log("Data being sent to SheetDB:", JSON.stringify(orderData));
+
+    fetch("https://sheetdb.io/api/v1/lo0wk05rnsefy", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(orderData)
+    })
+    
+    .then(response => response.json())
+    .then(result => {
+        console.log("SheetDB response:", result);
+        window.location.href = 'project 6.html';
+        if (result.error) {
+            throw new Error(result.error);   
         }
-
-        cartDiv.innerHTML = cart.map(item =>
-            `<h3>${item.name} - ${item.price} x ${item.quantity}</h3>`
-        ).join('');
-    }
-
-    function placeOrder() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-        if (cart.length === 0) {
-            alert("Your cart is empty!");
-            return;
-        }
-
-        window.location.href = './project 6.html';
-    }
-
-    function Empty() {
-        localStorage.removeItem('cart');
-        loadCart();
-    }
+    })
+    .catch(err => {
+        console.error("Error in submission:", err);
+        alert("There was a problem submitting your order.");
+    });
+}
+function Empty() {
+    localStorage.removeItem('cart');
+    loadCart();
 </script>
 </html>
