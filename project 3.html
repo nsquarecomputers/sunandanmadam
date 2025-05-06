@@ -216,6 +216,7 @@ footer {
         existingProduct.quantity += 1;
     } else {
         cart.push({ name: name, price: price, quantity: 1 });
+        alert("Successfully Added to Cart")
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
