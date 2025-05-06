@@ -121,38 +121,33 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .arrow:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-        }
-
-                .right {
+        .right {
             transform: rotate(180deg);
         }
         
-.frame {
-    width: 80%; /* Increased from 50% */
-    height: 100%;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    position: relative;
-}
-
-.slider {
-    display: flex;
-    width: 300%; /* 100% per image x 3 images */
-    height: 100%;
-    transition: transform 0.8s ease-in-out;
-}
-
-.images {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    flex: 0 0 100%; /* Each image takes full width of frame */
-    border-radius: 10px;
-}
+        .frame {
+            width: 80%; /* Increased from 50% */
+            height: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .slider {
+            display: flex;
+            width: 300%; /* 100% per image x 3 images */
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
+        }
+        
+        .images {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex: 0 0 100%; /* Each image takes full width of frame */
+            border-radius: 10px;
+        }
 
 
         footer {
