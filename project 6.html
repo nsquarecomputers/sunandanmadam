@@ -115,13 +115,20 @@
         height: 33px;
         border-radius: 30px;
     }
+    #datetime{
+        width: 98%;
+        height: 35px;
+        margin-bottom: 10px;
+        border: 1px solid;
+        border-radius: 5px;
+    }
         </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <h1>Order Registration</h1>
         <br><br>
-        <form action="https://sheetdb.io/api/v1/enztjyw3tsjpm" method="post">
+        <form action="https://sheetdb.io/api/v1/enztjyw3tsjpm" method="post" id="sheetdb-form">
         <div class="outerbox">
             <div class="ficon">
                 <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
@@ -138,11 +145,14 @@
                 Male<input type="radio" name="gender">
                 Female<input type="radio" name="gender">
 
-                <button id="submit">Submit</button>
+                <button  id="submit">Submit</button>
             </div>
             <div class="right">
 
             <textarea placeholder="Address" id="address" name="data[Address]"></textarea>
+            <input type="datetime-local" id="datetime" name="data[Date And Time]">
+            <input type="hidden" id="orderId" name="data[Order Id]"> 
+            <p><strong>Generated Order ID:</strong> <span id="displayOrderId"></span></p>
         </div>
             </div>
         </div>
@@ -150,7 +160,7 @@
         </form>
     </body>
     <script>
-               function pad(n) {
+        function pad(n) {
         return n.toString().padStart(2, '0');
     }
 
