@@ -4,87 +4,104 @@
     <title>Your Cart</title>
     <style>
         body {
-    background: linear-gradient(45deg, blue, skyblue);
-}
-h1 {
-    text-align: center;
-    color: aqua;
-}
-#cartItems {
-    border: 1px;
-    height: 780px;
-    width: 25%;
-    margin-left: 39%;
-    border-radius: 10px;
-    background: linear-gradient(45deg, skyblue, rgb(86, 148, 235) );
-    color: white;
-    margin-top: 15px;
-    
-}
-h3 {
-    text-align: center;
-}
-.button {
-    border: 1px;
-    width: 100%;
-    height: 810px;
-    display: flex;
-}
-button {
-    height: 40px;
-    width: 200px;
-    margin-left: 5%;
-    margin-top: 35%;
-    border-radius: 10px;
-    border: 1px solid white;
-    background-color: rgb(255, 217, 0);
-    font-size: 17px;
-    font-weight: bold;
-}
-#empty {
-    margin-top:30%;
-    margin-left: -10%;
-    background-color: brown;
-    color: white;
-}
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f1c40f;
+            margin-top: 20px;
+            font-size: 48px;
+        }
+
+        #cartItems {
+            border: 1px solid #fff;
+            height: 780px;
+            width: 30%;
+            margin: 20px auto;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #34495e, #2c3e50);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h3 {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 20px;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            height: 45px;
+            width: 180px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button:nth-child(2) {
+            background-color: #f1c40f;
+            color: #2c3e50;
+        }
+
+        #empty {
+            background-color: #e74c3c;
+            color: white;
+        }
     </style>
 </head>
 <body onload="loadCart()">
     <h1>Your Cart</h1>
-    <div class="button">
     <div id="cartItems"></div>
+    <div class="button">
         <button onclick="placeOrder()">Place Order</button>
         <button onclick="Empty()" id="empty">Empty Cart</button>
     </div>
 </body>
 <script>
     function loadCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartDiv = document.getElementById('cartItems');
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartDiv = document.getElementById('cartItems');
 
-    if (cart.length === 0) {
-        cartDiv.innerHTML = '<h3>Your cart is empty.</h3>';
-        return;
+        if (cart.length === 0) {
+            cartDiv.innerHTML = '<h3>Your cart is empty.</h3>';
+            return;
+        }
+
+        cartDiv.innerHTML = cart.map(item =>
+            `<h3>${item.name} - ${item.price} x ${item.quantity}</h3>`
+        ).join('');
     }
 
-    cartDiv.innerHTML = cart.map(item =>
-        `<h3>${item.name} - ${item.price} x ${item.quantity}</h3>`
-    ).join('');
-}
+    function placeOrder() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-function placeOrder() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+            return;
+        }
 
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
+        window.location.href = './project 6.html';
     }
 
-    window.location.href = './project 6.html';
-}
-function Empty() {
-    localStorage.removeItem('cart');
-    loadCart();
-}
+    function Empty() {
+        localStorage.removeItem('cart');
+        loadCart();
+    }
 </script>
 </html>
