@@ -36,6 +36,7 @@
         .button {
             justify-content: center;
             gap: 20px;
+            display: flex;
         }
 
         button {
@@ -66,8 +67,8 @@
 </head>
 <body onload="loadCart()">
     <h1>Your Cart</h1>
-    <div class="button">
     <div id="cartItems"></div>
+    <div class="button">
         <button onclick="placeOrder()">Place Order</button>
         <button onclick="Empty()" id="empty">Empty Cart</button>
     </div>
