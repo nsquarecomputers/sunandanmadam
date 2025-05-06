@@ -222,44 +222,21 @@ footer {
 }
 
 function submitCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProduct = cart.find(item => item.name === name);
 
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        cart.push({ name: name, price: price, quantity: 1 });
     }
 
-    // Combine all cart items into a single line (without price)
-    const productSummary = cart.map(item => 
-        `${item.name} (x${item.quantity})`  // No price, only name and quantity
-    ).join(", ");
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
 
-    // Ensure we send an array with a proper object structure
-    const orderData = {
-        Product: productSummary  // Ensure this matches your Google Sheet column
-    };
-
-    console.log("Data being sent to SheetDB:", JSON.stringify(orderData));
-
-    fetch("https://sheetdb.io/api/v1/enztjyw3tsjpm", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(orderData)
-    })
-    .then(response => response.json())
-    .then(result => {
-        console.log("SheetDB response:", result);
-        if (result.error) {
-            throw new Error(result.error);   
-        }
-        window.location.href = 'cart.html';
-    })
-    .catch(err => {
-        console.error("Error in submission:", err);
-        alert("There was a problem submitting your order.");
-    });
+function submitCart() {
+    window.location.href = 'cart.html';
 }
 </script>
 </html>
