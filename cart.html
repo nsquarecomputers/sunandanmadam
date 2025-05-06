@@ -74,7 +74,23 @@
     </div>
 </body>
 <script>
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
+   function loadCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartDiv = document.getElementById('cartItems');
+
+    if (cart.length === 0) {
+        cartDiv.innerHTML = '<h3>Your cart is empty.</h3>';
+        return;
+    }
+
+    cartDiv.innerHTML = cart.map(item =>
+        `<h3>${item.name} - ${item.price} x ${item.quantity}</h3>`
+    ).join('');
+}
+
+function placeOrder() {
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     if (cart.length === 0) {
         alert("Your cart is empty!");
@@ -117,5 +133,6 @@ const cart = JSON.parse(localStorage.getItem('cart')) || [];
 function Empty() {
     localStorage.removeItem('cart');
     loadCart();
+}
 </script>
 </html>
