@@ -207,22 +207,7 @@ footer {
     </footer>
 </body>
 <script>
-    function addToCart(name, price) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existingProduct = cart.find(item => item.name === name);
-
-    if (existingProduct) {
-        existingProduct.quantity += 1;
-    } else {
-        cart.push({ name: name, price: price, quantity: 1 });
-        alert("Successfully Added to Cart")
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-function submitCart() {
-    function addToCart(name, price) {
+        function addToCart(name, price) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const existingProduct = cart.find(item => item.name === name);
 
