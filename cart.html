@@ -17,7 +17,6 @@
 
         #cartItems {
             border: 1px solid #fff;
-            height: 780px;
             width: 30%;
             margin: 20px auto;
             border-radius: 15px;
@@ -54,12 +53,12 @@
             transform: scale(1.05);
         }
 
-        button:nth-child(2) {
-            background-color: #f1c40f;
-            color: #2c3e50;
+        button:nth-child(1) {
+            background-color: #2ecc71;
+            color: white;
         }
 
-        #empty {
+        button:nth-child(2) {
             background-color: #e74c3c;
             color: white;
         }
@@ -72,76 +71,80 @@
         <button onclick="placeOrder()">Place Order</button>
         <button onclick="Empty()" id="empty">Empty Cart</button>
     </div>
-</body>
-<script>
-  function loadCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartDiv = document.getElementById('cartItems');
 
-    if (cart.length === 0) {
-        cartDiv.innerHTML = '<h3>Your cart is empty.</h3>';
-        return;
-    }
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartDiv = document.getElementById('cartItems');
 
-    let total = 0;
-    let itemsHTML = cart.map(item => {
-        const itemTotal = parseFloat(item.price) * parseInt(item.quantity);
-        total += itemTotal;
-        return `<h3>${item.name} - ${item.price} x ${item.quantity}</h3>`;
-    }).join('');
+            if (cart.length === 0) {
+                cartDiv.innerHTML = '<h3>Your cart is empty.</h3>';
+                return;
+            }
 
-    itemsHTML += `<hr><h3>Total: $${total.toFixed(2)}</h3>`;
-    cartDiv.innerHTML = itemsHTML;
-    console.log(total);
-}
+            let total = 0;
+            let itemsHTML = cart.map(item => {
+                const cleanPrice = parseFloat(item.price.toString().replace(/[^\d.]/g, ''));
+                const quantity = parseInt(item.quantity);
+                const itemTotal = cleanPrice * quantity;
+                total += itemTotal;
+                return `<h3>${item.name} - ₹${cleanPrice} x ${quantity}</h3>`;
+            }).join('');
 
-function placeOrder() {
-
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
-
-    // Combine all cart items into a single line (without price)
-    const productSummary = cart.map(item => 
-        `${item.name} (x${item.quantity})`  // No price, only name and quantity
-    ).join(", ");
-
-    // Ensure we send an array with a proper object structure
-    const orderData = {
-        Product: productSummary  // Ensure this matches your Google Sheet column
-    };
-
-    console.log("Data being sent to SheetDB:", JSON.stringify(orderData));
-
-    fetch("https://sheetdb.io/api/v1/lo0wk05rnsefy", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(orderData)
-    })
-    
-    .then(response => response.json())
-    .then(result => {
-        console.log("SheetDB response:", result);
-        window.location.href = 'project 6.html';
-        if (result.error) {
-            throw new Error(result.error);   
+            itemsHTML += `<hr><h3>Total: ₹${total.toFixed(2)}</h3>`;
+            cartDiv.innerHTML = itemsHTML;
         }
-    })
-    .catch(err => {
-        console.error("Error in submission:", err);
-        alert("There was a problem submitting your order.");
-    });
-}
-function Empty() {
-    localStorage.removeItem('cart');
-    loadCart();
-}
-</script>
-</html>
-</script>
+
+        function placeOrder() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            const productSummary = cart.map(item =>
+                `${item.name} (x${item.quantity})`
+            ).join(", ");
+
+            let total = cart.reduce((sum, item) => {
+                const cleanPrice = parseFloat(item.price.toString().replace(/[^\d.]/g, ''));
+                const quantity = parseInt(item.quantity);
+                return sum + (cleanPrice * quantity);
+            }, 0);
+
+            const orderData = {
+                Product: productSummary,
+                Total: `₹${total.toFixed(2)}`
+            };
+
+            console.log("Data being sent to SheetDB:", JSON.stringify(orderData));
+
+            fetch("https://sheetdb.io/api/v1/lo0wk05rnsefy", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log("SheetDB response:", result);
+                window.location.href = 'project 6.html';
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+            })
+            .catch(err => {
+                console.error("Error in submission:", err);
+                alert("There was a problem submitting your order.");
+            });
+        }
+
+        function Empty() {
+            localStorage.removeItem('cart');
+            loadCart();
+        }
+    </script>
+</body>
 </html>
