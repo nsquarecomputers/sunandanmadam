@@ -97,6 +97,16 @@ function placeOrder() {
         return;
     }
 
+       let total = 0;
+    let itemsHTML = cart.map(item => {
+        const itemTotal = parseFloat(item.price) * parseInt(item.quantity);
+        total += itemTotal;
+        return `<h3>${item.name} - ${item.price} x ${item.quantity}</h3>`;
+    }).join('');
+
+    itemsHTML += `<hr><h3>Total: $${total.toFixed(2)}</h3>`;
+    cartDiv.innerHTML = itemsHTML;
+
     // Combine all cart items into a single line (without price)
     const productSummary = cart.map(item => 
         `${item.name} (x${item.quantity})`  // No price, only name and quantity
