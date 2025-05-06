@@ -67,14 +67,14 @@
 </head>
 <body onload="loadCart()">
     <h1>Your Cart</h1>
-    <div id="cartItems"></div>
     <div class="button">
+    <div id="cartItems"></div>
         <button onclick="placeOrder()">Place Order</button>
         <button onclick="Empty()" id="empty">Empty Cart</button>
     </div>
 </body>
 <script>
-   function loadCart() {
+    function loadCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartDiv = document.getElementById('cartItems');
 
@@ -134,5 +134,7 @@ function Empty() {
     localStorage.removeItem('cart');
     loadCart();
 }
+</script>
+</html>
 </script>
 </html>
