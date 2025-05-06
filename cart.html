@@ -106,6 +106,7 @@ function placeOrder() {
 
     itemsHTML += `<hr><h3>Total: $${total.toFixed(2)}</h3>`;
     cartDiv.innerHTML = itemsHTML;
+    console.log(total);
 
     // Combine all cart items into a single line (without price)
     const productSummary = cart.map(item => 
