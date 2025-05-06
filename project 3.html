@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>eCommerce Product Page</title>
+<Style>
+    body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to top, black,grey );
+}
+
+header {
+    background-color: rgb(77, 77, 77);
+    color: white;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px; /* Add padding for spacing */
+}
+
+.header-content h1 {
+    margin: 0;
+    flex-grow: 1; /* Ensures the title takes the available space */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px; /* Adjusted spacing between menu items */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #a8dadc; /* Hover effect color change */
+}
+
+.cart-icon {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon img {
+    width: 30px;
+    height: auto;
+}
+
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product {
+    background: linear-gradient(to bottom, orange,white,green);
+    margin: 10px;
+    padding: 20px;
+    width: calc((100% / 3) - 40px); /* Adjust for 3 products per row */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.product h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.price {
+    color: #007bff;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.add-to-cart {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #218838;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .product {
+        width: calc((100% / 2) - 30px); /* Adjust for 2 products per row */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .product {
+        width: 100%; /* Full width for single product per row */
+    }
+}
+#cart {
+    Width: 160px;
+    height: 40px;
+    background-color: rgb(118, 117, 117);
+    border-radius: 15px;
+    border: 0px;
+    font-weight: bold;
+    font-size: 15px;
+}
+</Style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Our Online Store</h1>
+            <nav>
+                <ul>
+                    <li><a href="./Project 2.html">Home</a></li>
+                    <li><a href="./project 1.html">About Me</a></li>
+                    <li><a href="./Survey Form.html"> <b> Registration </b></a></li>
+                </ul>
+                <div class="cart-icon"></div>
+            </nav>
+        </div>
+    </header>
+    <main class="product-container">
+        <!-- Products-->
+        <section class="product" id="product1">
+            <img src="./Products\CPU.jpg" width="100%" alt="Product 1">
+            <h2>CPU core i7 </h2>
+            <p class="price">Rs12,000/-</p>
+            <button type="button" class="add-to-cart" onclick="addToCart('CPU Core i7', 'Rs12,000/-')">Add to Cart</button>
+        </section>
+        <section class="product" id="product2">
+            <img src="./Products\Mother Board.jpg" width="100%" alt="Product 1">
+            <h2>Asus MotherBoard </h2>
+            <p class="price">Rs 7,000/-</p>
+            <button type="button" class="add-to-cart" onclick="addToCart('Asus Motherboard', 'Rs7,000/-')">Add to Cart</button>
+        </section>
+        <section class="product" id="product3">
+            <img src="./Products\Ram 16GB.jpg" width="100%" alt="Product 1">
+            <h2>Ram DDR4 16GB</h2>
+            <p class="price">Rs4,000/-</p>
+            <button type="button" class="add-to-cart" onclick="addToCart('Ram DDR4 16GB', 'Rs4,000/-')">Add to Cart</button>
+        </section>
+        <section class="product" id="product4">
+            <img src="./Products\Ram 8GB.jpg" width="100%" alt="Product 1">
+            <h2>Ram DDR4 8GB</h2>
+            <p class="price">Rs3,000/-</p>
+            <button type="button" class="add-to-cart" onclick="addToCart('Ram DDR4 16GB', 'Rs4,000/-')">Add to Cart</button>
+        </section>
+        <section class="product" id="product5">
+            <img src="./Products\SSD.jpg" width="100%" alt="Product 1">
+            <h2>SSD NVME 1TB</h2>
+            <p class="price">Rs3,500/-</p>
+            <button type="button" class="add-to-cart" onclick="addToCart('SSD NVME 1TB', 'Rs3,500/-')">Add to Cart</button>
+        </section>
+        <section class="product" id="product6">
+            <img src="./Products\Desktop.jpg" width="100%" alt="Product 1">
+            <h2>Lenovo All in One, Win10, 8GB Ram, i5 12thGen, 512 SSD</h2>
+            <p class="price">Rs60,000/-</p>
+            <button type="button" class="add-to-cart" onclick="addToCart('Ram DDR4 16GB', 'Rs4,000/-')">Add to Cart</button>
+        </section>
+    </main>
+    <footer>
+        <button type="button" id="cart" onclick="submitCart()">Go To Cart</button>
+    </footer>
+</body>
+<script>
+    function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProduct = cart.find(item => item.name === name);
+
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        cart.push({ name: name, price: price, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function submitCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    // Combine all cart items into a single line (without price)
+    const productSummary = cart.map(item => 
+        `${item.name} (x${item.quantity})`  // No price, only name and quantity
+    ).join(", ");
+
+    // Ensure we send an array with a proper object structure
+    const orderData = {
+        Product: productSummary  // Ensure this matches your Google Sheet column
+    };
+
+    console.log("Data being sent to SheetDB:", JSON.stringify(orderData));
+
+    fetch("https://sheetdb.io/api/v1/enztjyw3tsjpm", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log("SheetDB response:", result);
+        if (result.error) {
+            throw new Error(result.error);   
+        }
+        window.location.href = 'cart.html';
+    })
+    .catch(err => {
+        console.error("Error in submission:", err);
+        alert("There was a problem submitting your order.");
+    });
+}
+</script>
+</html>

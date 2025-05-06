@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Online Form</title>
+        <style>
+    *
+    {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body 
+    {
+        background-color: #042590;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+    }
+    h1
+    {
+        text-align: center;
+        color: white;
+        font-size: 40px;    
+    }
+
+    .outerbox
+    {
+        border-radius: 20px;
+        border: 1px solid white;
+        height: 450px;
+        width: 1000px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(to right, #033186,#00AFFD);
+    }
+    .ficon
+    {
+        border: 0px solid yellow;
+        height: 400px;
+        width: 200px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 100px;
+    }
+    .fouterbox
+    {
+        border: 0px solid yellow;
+        height: 400px;
+        width: 800px;
+        background-color: #F1F1F1;
+        border-radius: 220px 0 0 220px;
+        display: flex;
+        justify-content: flex-end;
+        align-self: center;
+    }
+    .fouterbox .main
+    {
+        border: 0px solid black;
+        height: 300px;
+        width: 600px;
+        display: flex;
+        margin-top: 50px;
+        justify-content: center;
+        align-items: center;
+    }
+    .fouterbox .main .left, .right
+    {
+        border: 0px solid blue;
+        height: 300px;
+        width: 325px;
+    }
+    .fouterbox .main .left input[type="text"], .right select
+    {
+        width: 98%;
+        height: 35px;
+        margin-bottom: 10px;
+        border: 1px solid;
+        border-radius: 5px;
+    }
+    .fouterbox .main .right textarea
+    {
+        width: 98%;
+        height: 80px;
+        margin-bottom: 10px;
+        border: 1px solid;
+        border-radius: 5px;   
+    }
+    .fouterbox .main .left input[type="submit"], .right input[type="reset"]
+    {
+        width: 98%;
+        height: 35px;
+        margin-bottom: 10px;
+        border: 1px solid;
+        border-radius: 5px;   
+    }
+    .fouterbox .main .left input[type="number"]
+    {
+        width: 98%;
+        height: 35px;
+        margin-bottom: 10px;
+        border: 1px solid;
+        border-radius: 5px;   
+    }
+    button[id='submit']
+    {
+        background-color: #196AFF;
+        color: white;
+        font-size: 17px;
+        margin-top: 22px;
+        width: 290px;
+        height: 33px;
+        border-radius: 30px;
+    }
+        </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <h1>User Registration</h1>
+        <br><br>
+        <form action="https://sheetdb.io/api/v1/enztjyw3tsjpm" method="post">
+        <div class="outerbox">
+            <div class="ficon">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i> 
+            </div>
+
+            <div class="fouterbox">
+            <div class="main">
+            <div class="left">
+                <input type="text" name="data[First Name]" placeholder="First Name" id="First" required>
+                <input type="text" name="data[Last Name]" placeholder=" Last Name" id="Last" required>
+                <input type="text" name="data[Email]" placeholder="Email" id="Email" required>
+                <input type="number" maxlength="10" name="data[Mobile]" placeholder="Mobile No" id="Mobile">
+
+                Male<input type="radio" name="gender">
+                Female<input type="radio" name="gender">
+
+                <button onclick="gash()" id="submit">Submit</button>
+            </div>
+            <div class="right">
+
+            <textarea placeholder="Address" id="address" name="data[Address]"></textarea>
+        </div>
+            </div>
+        </div>
+        </div>
+        </form>
+    </body>
+    <script>
+        function gash() {
+    var address = document.getElementById('address').value
+    var email = document.getElementById('email').value
+    var Mobile = document.getElementById('Mobile').value
+    var First = document.getElementById('First').value 
+    var Last = document.getElementById('Last').value     
+    
+    if(First == ""){
+        alert("Please fill the First Name")
+    }
+
+    else if (Last == "") {
+        alert("Please fill the Last Name")
+    }
+
+    else if(email == ""){
+        alert("Please fill the email")
+    }
+    
+    else if(Mobile == "") {
+        alert("Please fill the Mobile No")
+    }
+
+    else if (address == "") {
+        alert("Please fill the address")
+    }
+
+    else {
+        alert("successfully registered")
+        var form = document.getElementById('sheetdb-form');
+        form.addEventListener("submit", e => {
+          e.preventDefault();
+          fetch(form.action, {
+              method : "POST",
+              body: new FormData(document.getElementById("sheetdb-form")),
+          })
+          .then(
+              response => response.json()
+          ).then((html) => {
+            alert('successfully Order Send')
+          });
+        });
+        }
+}
+
+    </script>
+</html>

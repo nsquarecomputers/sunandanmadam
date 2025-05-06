@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+    <head>
+        <title>dynamic Landing Page</title>
+        <style>
+            body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f8fb;
+    text-align: center;
+}
+
+header {
+    background-image: url('https://i.imgur.com/RurqKDM.jpg'); /* Add a background image */
+    color: white;
+    padding: 25px 20px;
+    background-size: cover;
+    background-position: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px; /* Adjusted spacing between menu items */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #a8dadc; /* Hover effect color change */
+}
+
+header img {
+    width: 140px;
+    height: 140px;
+    border-radius: 100%;
+    margin-bottom: 5px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.action-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.feature {
+    margin: 10px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 10px 10px rgb(84, 4, 4);
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+}
+.top {
+    margin-top: 20px;
+    border: 0px solid black;
+    height: 470px;
+    width: 96%;
+    margin-left: 2%;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    background-color: rgb(189, 187, 187);
+}
+.arrow {
+    cursor: pointer;
+    height: 100px;
+}
+.left {
+    margin-left: 25%;
+    margin-right: -5.5%;
+}
+.right {
+    transform: rotate(180deg);
+    margin-left: -2%;
+}
+.frame {
+    width: 35%;
+    height: 100%;
+    overflow: hidden;
+}
+.slider {
+    display: flex;
+    transition: 1s ease;
+}
+.images {   
+    margin-top: 20px;
+    margin-left: 10%;
+    width: 100%;
+    object-fit: cover;
+}
+.arrow:hover {
+    box-shadow: 0 0 15px rgb(62, 62, 62);
+}
+.right:hover {
+    transform: rotate(180deg);
+}
+header img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 100px rgb(73, 72, 72));
+}
+        </style>
+    </head>
+
+        <body>
+            <header>
+                <nav>
+                    <ul>
+                        <li><a href="./project 3.html"> <b> Shopping</b> </a> </li>
+                        <li><a href="./project 1.html">About Me</a></li>
+                        <li><a href="./Survey Form.html"> <b> Registration </b></a></li>
+                    </ul>
+                <img src="./NSQ\logo.jpg">
+                <h1>Welcome To N Square Computters</h1>
+                <p>Computer & Laptop Repairing Shop & CCTV Installtion Service.</p>
+            </header>
+            <section class="features">
+                <div class="feature">
+                    <h2> features One</h2>
+                    <p>Description Of feature
+                    One.</p>
+                </div>
+                <div class="feature">
+                    <h2> feature two</h2>
+                    <p>description of feature two.</p>
+                </div>
+                <!-- More features -->
+            </section>
+
+            <div class="main">
+                <div class="top">
+                    <img src="./Images/arrow.jpeg" class="arrow left" alt="">
+                <div class="frame">
+                    <div class="slider">
+                        <img class="images" src="./Images/image 1.jpg" alt="">
+                        <img class="images" src="./Images/image 3.jpg" alt="">
+                        <img class="images" src="./Images/image 4.jpg" alt="">
+                    </div>
+                </div>
+                <img src="./Images/arrow.jpeg" class="arrow right" alt="">
+                <div class="bottom">
+                
+                </div>
+                </div>
+            </div>
+            
+            <footer>
+                <h2> <p>© 2024 dynamic Landing Page. All 
+                rights reserved.</p> </h2>
+            </footer>
+            <script src="E:\Sunandan HTML Projects\Html Projects\Projects\JS\Project 2.js"></script>
+        </body>
+        <script>
+            const left = document.querySelector(".left")
+const right = document.querySelector(".right")
+const slider = document.querySelector(".slider")
+const images = document.querySelectorAll(".images")
+
+let slides = 1;
+const length = images.length
+
+const nextslide = function() {
+    slider.style.transform =`translateX(-${slides * 110}%)`;
+    slides++;
+}
+const prevslide = function() {
+    slider.style.transform =`translateX(-${(slides-2) * 110}%)`;
+    slides--;
+}
+const getfirstslide = function() {
+    slider.style.transform =`translateX(0px)`;
+    slides =1;
+}
+const getlastslide = function() {
+    slider.style.transform =`translateX(-${(length-1) * 110}%)`;
+    slides = length;
+}
+
+const changecolor = function(){
+    resetBg()
+    buttons[slides-1].style.backgroundColor = "White";
+}
+
+right.addEventListener("click", function(){
+    slides < images.length ? nextslide() : getfirstslide();
+    changecolor()
+});
+
+left.addEventListener("click", function(){
+    slides > 1 ? prevslide() : getlastslide();
+    changecolor()
+})
+        </script>
+        </html>
