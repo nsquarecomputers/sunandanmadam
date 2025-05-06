@@ -74,7 +74,7 @@
     </div>
 </body>
 <script>
-    function loadCart() {
+  function loadCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartDiv = document.getElementById('cartItems');
 
@@ -82,7 +82,8 @@
         cartDiv.innerHTML = '<h3>Your cart is empty.</h3>';
         return;
     }
-              let total = 0;
+
+    let total = 0;
     let itemsHTML = cart.map(item => {
         const itemTotal = parseFloat(item.price) * parseInt(item.quantity);
         total += itemTotal;
@@ -91,11 +92,6 @@
 
     itemsHTML += `<hr><h3>Total: $${total.toFixed(2)}</h3>`;
     cartDiv.innerHTML = itemsHTML;
-    console.log(total);
-        
-    cartDiv.innerHTML = cart.map(item =>
-        `<h3>${item.name} - ${item.price} x ${item.quantity}</h3>`
-    ).join('');
 }
 
 function placeOrder() {
