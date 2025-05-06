@@ -1,113 +1,118 @@
 <html>
 <head>  
-    <title>Sunandan N Madam - portfolio</title>
+    <title>Sunandan N Madam - Portfolio</title>
     <style>
         body {
-    font-family: arial, sans-serif;
-}
-header {
-    text-align: center;
-    margin-top: 2%; 
-    padding: 10px;
-    background: linear-gradient(45deg, rgb(193, 155, 250),rgb(51, 48, 139),rgb(151, 167, 255));
-    font-weight: bold;
-}
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
 
- nav ul {
-    display: flex;
-}
+        header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #1a1a1a, #2c2c2c);
+            color: #f0c674; /* Gold tone */
+        }
 
-nav ul li {
-    margin: 0 15px; /* Adjusted spacing between menu items */
-}
+        nav ul {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            list-style: none;
+            margin-top: 10px;
+        }
 
-nav ul li a {
-    color: #63c8e6; 
-    text-decoration: none;
-    padding: 5px 10px;
-    transition: color 0.3s ease;
-}
+        nav ul li {
+            margin: 0 20px;
+        }
 
-nav ul li a:hover {
-    color: red; /* Hover effect color change */
-}
+        nav ul li a {
+            color: #f0c674;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
 
-header img {    
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-section {
-    margin: 5px;     
-}
+        nav ul li a:hover {
+            color: #ffffff;
+        }
 
-.project {
-    width: 200px; /* Square dimensions */
-    height: 200px;
-    border: 1px solid rgb(73, 26, 26);
-    margin: 10px;
-    display: inline-block; /* Aligns the containers side by side */
-    text-align: center;
-    line-height: 200px; /* Vertically centers the text */
-}
-h1, h2 {
-    color: white;
-}
+        header img {    
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin-top: 10px;
+            border: 3px solid #f0c674;
+        }
 
-#bio, #work {
-    background: linear-gradient(45deg, rgb(155, 190, 250),rgb(48, 56, 139),rgb(151, 210, 255));
-    padding: 15px;
-    color:  white;
-}
-footer {
-    background-color: rgb(34, 34, 34);
-    text-align: center;
-    padding: 10px;
-    color: white;
-}
+        section {
+            margin: 5px;     
+        }
+
+        .project {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #888;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+            line-height: 200px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            color: #333;
+            font-weight: bold;
+        }
+
+        h1, h2 {
+            color: #f0c674;
+        }
+
+        #bio, #work {
+            background: linear-gradient(45deg, #2c2c2c, #1a1a1a);
+            padding: 20px;
+            color: white;
+        }
+
+        footer {
+            background-color: #111;
+            text-align: center;
+            padding: 15px;
+            color: #ccc;
+            font-size: 14px;
+        }
     </style>
-    </head>
-    <body>
-        <header>   
-            <nav>
-                <ul>
-                    <li><a href="./Project 2.html"> <b> Home </b> </a> </li>
-                    <li><a href="./project 3.html"> <b> Shopping</b> </a> </li>
-                    <li><a href="./Survey Form.html"> <b> Registration </b></a></li>
-                </ul>
-            </nav>
-            <img src="./NSQ\logo.jpg">
-            <h1> <b> N Squaree Computers </b> </h1>
-            <p> Computer Sales | Service | Networking | CCTV Installtion</p>
-        </header>
-        <section id="bio">
-            <h2> About Me</h2>
-            <p> Computers sales and service last 20 years </p>
-        </section>
-        <section id="work">
-            <h2> My Work </h2>
-            <div class="project" id="project1">project1</div>
-            <div class="project" id="project2">project2</div>
-            <div class="project" id="project3">project3</div>
-        </section>
-        <footer>
-            <p>Contact me at nsquarecomputers@gmail.com</p>
-        </footer>
-    </body>
-    </html>
+</head>
+<body>
+    <header>   
+        <nav>
+            <ul>
+                <li><a href="./Project 2.html">Home</a></li>
+                <li><a href="./project 3.html">Shopping</a></li>
+                <li><a href="./Survey Form.html">Registration</a></li>
+            </ul>
+        </nav>
+        <img src="./NSQ/logo.jpg" alt="Logo">
+        <h1>N Squaree Computers</h1>
+        <p>Computer Sales | Service | Networking | CCTV Installation</p>
+    </header>
 
+    <section id="bio">
+        <h2>About Me</h2>
+        <p>Computer sales and service for the last 20 years.</p>
+    </section>
 
+    <section id="work">
+        <h2>My Work</h2>
+        <div class="project" id="project1">Project 1</div>
+        <div class="project" id="project2">Project 2</div>
+        <div class="project" id="project3">Project 3</div>
+    </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
+    <footer>
+        <p>Contact me at nsquarecomputers@gmail.com</p>
+    </footer>
+</body>
+</html>
