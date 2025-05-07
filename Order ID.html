@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            padding: 30px;
+            border: 2px solid #196AFF;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order-id {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .order-id li {
+            margin: 5px 0;
+            color: #196AFF;
+            font-weight: bold;
+        }
+        #clearBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4c4c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #clearBtn:hover {
+            background-color: #e03939;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Thank you for your Order!</h2>
+        <p>Your previous Order IDs:</p>
+        <ul class="order-id" id="orderIdDisplay">Loading...</ul>
+        <button id="clearBtn">Clear All Order IDs</button>
+    </div>
+
+    <script>
+        function loadOrderIds() {
+            const orderIdContainer = document.getElementById("orderIdDisplay");
+            const orderIds = JSON.parse(localStorage.getItem("orderIds")) || [];
+
+            if (orderIds.length > 0) {
+                orderIdContainer.innerHTML = orderIds.map(id => `<li>${id}</li>`).join('');
+            } else {
+                orderIdContainer.innerHTML = "<li>No Order IDs found.</li>";
+            }
+        }
+
+        document.getElementById("clearBtn").addEventListener("click", function () {
+            if (confirm("Are you sure you want to delete all stored Order IDs?")) {
+                localStorage.removeItem("orderIds");
+                loadOrderIds(); // Refresh the list
+            }
+        });
+
+        window.onload = loadOrderIds;
+    </script>
+</body>
+</html>

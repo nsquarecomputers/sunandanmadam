@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Track Order</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            margin: 10px;
+            border: none;
+        }
+
+        input {
+            width: 250px;
+        }
+
+        button {
+            background-color: #f1c40f;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product details</h1>
+    <input type="text" id="orderIdInput" placeholder="Enter Order ID">
+    <button onclick="trackOrder()">Track</button>
+    <div id="result"></div>
+
+    <script>
+        function trackOrder() {
+            const orderId = document.getElementById("orderIdInput").value.trim();
+            if (!orderId) {
+                alert("Please enter a valid Order ID.");
+                return;
+            }
+
+            fetch("https://sheetdb.io/api/v1/lo0wk05rnsefy")
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Full SheetDB Response:", data);
+                    let resultDiv = document.getElementById("result");
+
+                    for (let i = 1; i < data.length; i++) {
+                        if (data[i]["Order Id"] === orderId) {
+                            const product = data[i - 1]?.Product || "N/A";
+                            const total = data[i - 1]?.["Total Price"] || "N/A";
+
+                            resultDiv.innerHTML = `
+                                <p><strong>Order ID:</strong> ${orderId}</p>
+                                <p><strong>Products:</strong> ${product}</p>
+                                <p><strong>Total Price:</strong> ${total}</p>
+                            `;
+                            return;
+                        }
+                    }
+
+                    resultDiv.innerHTML = `<p>No order found for Order ID <strong>${orderId}</strong>.</p>`;
+                })
+                .catch(err => {
+                    console.error("Error:", err);
+                    document.getElementById("result").innerHTML = `<p>Error fetching order details.</p>`;
+                });
+        }
+    </script>
+</body>
+</html>
