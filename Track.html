@@ -4,7 +4,7 @@
     <title>Track Order</title>
     <style>
         body {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background-color: #2a5298;
             font-family: 'Segoe UI', sans-serif;
             color: white;
             text-align: center;
@@ -31,14 +31,104 @@
         #result {
             margin-top: 30px;
             font-size: 22px;
+            border: 1px solid #f1c40f;
+            width: 100%;
+            height: 280px;
+            display: flex;
+        }
+        #detail {
+            margin-top: 30px;
+            font-size: 22px;
+            border: 1px solid #f1c40f;
+            width: 100%;
+            height: 280px;
+            display: flex;
+        }
+        h4 {
+           color: #f1c40f;
+        }
+        .order {
+            border: 1px solid #f1c40f;
+            width: 11%;
+            height: 100%;
+        }
+        #product {
+            width: 75%
+        }
+        #totalprice {
+            border: 1px solid #f1c40f;
+            width: 14%;
+            height: 100%;
+        }
+        .di {
+            border: 1px solid #f1c40f;
+            width: 100%;
+            height: 20%;
+        }
+        #email {
+            width: 22%
+        }
+        #address {
+            width: 44.5%
         }
     </style>
 </head>
 <body>
     <h1>Product details</h1>
     <input type="text" id="orderIdInput" placeholder="Enter Order ID">
-    <button onclick="trackOrder()">Track</button>
-    <div id="result"></div>
+    <button onclick="trackOrder()">Product and Buyer's detail</button>
+    <div id="detail">
+        <div id="First" class="order">
+            <div class="di">
+            <h4>First Name</h4>
+            </div>
+            <p id="Name"></p>
+        </div>
+        <div id="last" class="order" >
+            <div class="di">
+            <h4>Last Name</h4>
+            </div>
+            <p id="lasts"></p>
+        </div>
+        <div id="mobile" class="order" >
+            <div class="di">
+            <h4><strong>Mobile</strong></h4>
+            </div>
+            <p id="mobiles"></p>
+        </div>
+        <div id="email" class="order" >
+            <div class="di">
+            <h4><strong>Email</strong></h4>
+            </div>
+            <p id="emails"></p>
+        </div>
+        <div id="address" class="order">
+            <div class="di">
+            <h4><strong>Address</strong></h4>
+            </div>
+            <p id="add"></p>
+        </div>
+    </div>
+    <div id="result">
+        <div id="order" class="order">
+            <div class="di">
+            <h4>Order ID:</h4>
+            </div>
+            <p id="Id"></p>
+        </div>
+        <div id="product" class="order" >
+            <div class="di">
+            <h4><strong>Products</strong></h4>
+            </div>
+            <p id="products"></p>
+        </div>
+        <div id="totalprice" class="order" >
+            <div class="di">
+            <h4><strong>Total Price</strong></h4>
+            </div>
+            <p id="Price"></p>
+        </div>
+    </div>
 
     <script>
         function trackOrder() {
@@ -52,29 +142,47 @@
                 .then(res => res.json())
                 .then(data => {
                     console.log("Full SheetDB Response:", data);
-                    let resultDiv = document.getElementById("result");
+                    let orders = document.getElementById("Id");
+                    let products = document.getElementById("products");
+                    let Price = document.getElementById("Price");
 
                     for (let i = 1; i < data.length; i++) {
                         if (data[i]["Order Id"] === orderId) {
                             const product = data[i - 1]?.Product || "N/A";
                             const total = data[i - 1]?.["Total Price"] || "N/A";
 
-                            resultDiv.innerHTML = `
-                                <p><strong>Order ID:</strong> ${orderId}</p>
-                                <p><strong>Products:</strong> ${product}</p>
-                                <p><strong>Total Price:</strong> ${total}</p>
-                            `;
-                            return;
+                            orders.innerHTML = `${orderId}`;
+                            products.innerHTML = `${product}`;
+                            Price.innerHTML = `${total}`;
                         }
                     }
-
-                    resultDiv.innerHTML = `<p>No order found for Order ID <strong>${orderId}</strong>.</p>`;
                 })
-                .catch(err => {
-                    console.error("Error:", err);
-                    document.getElementById("result").innerHTML = `<p>Error fetching order details.</p>`;
-                });
-        }
+
+                const apiURL = `https://sheetdb.io/api/v1/enztjyw3tsjpm/search?Order%20Id=${orderId}`;
+                fetch(apiURL)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('API Response:', data); // Log the full response for debugging
+
+                        if (data.length === 0) {
+                            alert("No details found with this Order ID.");
+                            return;
+                        }
+
+                        const userData = data[0]; // Access the first (and presumably only) matching record
+
+                        document.getElementById("Name").innerText = userData["First Name"] || "N/A";
+                        document.getElementById("lasts").innerText = userData["Last Name"] || "N/A";
+                        document.getElementById("mobiles").innerText = userData["Mobile"] || "N/A";
+                        document.getElementById("emails").innerText = userData["Email"] || "N/A";
+                        document.getElementById("add").innerText = userData["Address"] || "N/A";
+                    })
+                    .catch(err => {
+                        console.error("Error fetching user details:", err);
+                        alert("An error occurred while fetching user details. Please try again later.");
+                    });
+            }
+
     </script>
 </body>
 </html>
