@@ -5,163 +5,170 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Invoice</title>
   <style>
-    .main {
-        border: 1px solid black;
-        width: 45%;
-        height: 935px;
-        margin-left: 30%;
-    }
-    .first {
-        display: flex;
-        background-color: rgb(236, 235, 235);
-        border: 0px solid black;
-        height: 85px;
-    }
-    .ns {
-        border: 0px solid black;
-        width: 55%;
-        height: 70px;
-        text-align: center;
-    }
-    .date {
-        border: 0px solid black;
-        width: 50%;
-        height: 90px;
-        text-align: center;
-        border-radius: 45px 0 0px 45px;
-        background: linear-gradient(180deg, orangered, orange);
-        color: white;
-    }
-    #In {
-        margin-top: 0px;
-        margin-bottom: -10px;
-    }
-    #ps {
-        margin-bottom: 0px;
-        font-size: 18px;
-        margin-left: 60px;
-    }
-    #dates {
-        margin-top: 5px;
-        width: 150px;
-        border: 0px;
-        height: 25px;
-        border-radius: 10px;
-    }
-    .second {
-        border: 0px solid black;
-        margin-top: 25px;
-        height: 90px;
-    }
-    .party {
-        width: 230px;
-        height: 25px;
-        margin-left: 20px;
-        border-radius: 10px;
-    }
-    #ssd {
-        width: 280px;
-        margin-top: 5px;
-    }
-    #add {
-         width: 63%;
-         margin-top: 10px;
-    }
-    .third {
-        margin-top: 20px;
-    }
-    .head {
-        display: flex;
-        border: 0px solid black;
-        width: 96%;
-        height: 35px;
-        text-align: center;
-        margin-left: 2%;
-        background-color: rgb(220, 218, 218);
-    }
-    .Sr {
-        width: 25%;
-        height: 30px;
-    }
-    #item {
-        width: 79%;
-    }   
-    #Vu {
-        width: 7%;
-    }
-    #qty {
-        width: 12%;
-    }
-    h3 {
-        margin-top: 3px;
-    }
-    input {
-        width: 410px;
-        margin-left: 5px;
-        margin-top: 15px;
-        height: 20px;
-        border-radius: 5px;
-    }
-    .max {
-        width: 120px;
-    }
-    #ron {
-        width: 50px;
-        margin-left: 2.2%;
-    }
-    #ror {
-        width: 50px;
-        margin-right: 5px;
-        margin-left: 5px;
-    }
-    .totals {
-        display: flex;
-    }
-    .strike {
-        margin-right: 10px;
-        color: rgb(52, 52, 52);
-    }
-    p {
-        margin-right: 50px;
-        font-size: 20px;
-        color: rgb(52, 52, 52);
-    }
-    .sub {
-        margin-top: 20px;
-    }
-    .subs {
-        margin-top: 20px;
-    }
-    .day{
-        margin-left: 20px;
-        border: 1px solid rgb(205, 204, 204);
-        width: 630px;
-        height: 50px;
-        text-align: right;
-    }
-    .num{
-        border: 1px solid rgb(205, 204, 204);
-        width: 190px;
-        height: 50px;
-        text-align: right;
-    }
-    .grand {
-        color: orangered;
-    }
-    #grand {
-        color: orangered;
-    }
-    button {
-        margin-left: 80px;
-        width: 150px;
-        height: 35px;
-        border-radius: 20px;
-        background-color: green;
-        color: white;
-    }
+   * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+.outer {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.main {
+  border: 1px solid #000;
+  padding: 20px;
+  background: #fff;
+}
+
+.first {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ecebeb;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.ns {
+  flex: 1;
+  text-align: center;
+
+}
+
+.date {
+  background: linear-gradient(180deg, orangered, orange);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 45px 0 0 45px;
+  text-align: center;
+  width: 300px;
+}
+
+#dates {
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 8px;
+  border: none;
+}
+
+/* Party Info */
+.second {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.party {
+  flex: 1 1 200px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#add {
+  flex: 2 1 400px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Table Headers */
+.head {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px 80px 100px;
+  background-color: #dcdada;
+  text-align: center;
+  padding: 8px;
+  margin-top: 30px;
+}
+
+/* Data Rows */
+.fills {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px 80px 100px;
+  gap: 5px;
+  padding: 5px 0;
+}
+
+.fills input {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Totals */
+.totals {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.sub, .subs {
+  flex: 1 1 300px;
+}
+.num {
+  height: 45px;
+}
+.day, .num {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.gsts {
+  margin: 0;
+  font-size: 16px;
+}
+
+.strike {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.grand {
+  color: orangered;
+  font-weight: bold;
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+}
+
+@media print {
+  button {
+    display: none;
+  }
+
+  body {
+    background: white;
+  }
+}
+
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
+  <div class="outer">
   <div class="main">
     <div class="first">
       <div class="ns">
@@ -180,6 +187,7 @@
       <input type="text" placeholder="GST No" class="party" required name="GST No">
       <input type="text" placeholder="Address" class="party" id="add" required name="Address">
       <button>Save Invoice</button>
+      <button id="downloadPDF">Download PDF</button>
     </div>
 
     <div class="third">
@@ -192,145 +200,193 @@
       </div>
 
 
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 1"><input type="number" class="max" id="ror" name="Qty 1"><input type="number" class="max" name="Price 1"><input type="number" class="max amount" readonly name="amount 1"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 2"><input type="number" class="max" id="ror" name="Qty 2"><input type="number" class="max" name="Price 2"><input type="number" class="max amount" readonlyname="amount 2"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 3"><input type="number" class="max" id="ror" name="Qty 3"><input type="number" class="max" name="Price 3"><input type="number" class="max amount" readonly name="amount 3"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 4"><input type="number" class="max" id="ror" name="Qty 4"><input type="number" class="max" name="Price 4"><input type="number" class="max amount" readonlyname="amount 4"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 5"><input type="number" class="max" id="ror" name="Qty 5"><input type="number" class="max"name="Price 5"><input type="number" class="max amount" readonly name="amount 5"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 6"><input type="number" class="max" id="ror" name="Qty 6"><input type="number" class="max" name="Price 6"><input type="number" class="max amount" readonly name="amount 6"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 7"><input type="number" class="max" id="ror" name="Qty 7"><input type="number" class="max" name="Price 7"><input type="number" class="max amount" readonly name="amount 7"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 8"><input type="number" class="max" id="ror" name="Qty 8"><input type="number" class="max" name="Price 8"><input type="number" class="max amount" readonly name="amount 8"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 9"><input type="number" class="max" id="ror" name="Qty 9"><input type="number" class="max" name="Price 9"><input type="number" class="max amount" readonly name="amount 9"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 10"><input type="number" class="max" id="ror" name="Qty 10"><input type="number" class="max" name="Price 10"><input type="number" class="max amount" readonly name="amount 10"></div>
-        <div class="fills"><input type="number" class="max" id="ron" ><input type="text" name="Product 11"><input type="number" class="max" id="ror" name="Qty 11"><input type="number" class="max" name="Price 11"><input type="number" class="max amount" readonly name="amount 11"></div>
+        <div class="fills"><input type="text" class="max" id="ron" readonly><input type="text" name="Product 1"><input type="number" class="max" id="ror" name="Qty 1"><input type="number" class="max" id="rors" name="Price 1"><input type="number" class="max amount" id="ss" readonly name="amount 1"></div>
+        <div class="fills"><input type="text" class="max" id="ron" readonly><input type="text" name="Product 2"><input type="number" class="max" id="ror" name="Qty 2"><input type="number" class="max" id="rors" name="Price 2"><input type="number" class="max amount" id="ss" readonly name="amount 2"></div>
+        <div class="fills"><input type="text" class="max" id="ron" readonly><input type="text" name="Product 3"><input type="number" class="max" id="ror" name="Qty 3"><input type="number" class="max" id="rors" name="Price 3"><input type="number" class="max amount" id="ss" readonly name="amount 3"></div>
+        <div class="fills"><input type="text" class="max" id="ron" readonly><input type="text" name="Product 4"><input type="number" class="max" id="ror" name="Qty 4"><input type="number" class="max" id="rors" name="Price 4"><input type="number" class="max amount" id="ss" readonly name="amount 4"></div>
+        <div class="fills"><input type="text" class="max" id="ron" readonly><input type="text" name="Product 5"><input type="number" class="max" id="ror" name="Qty 5"><input type="number" class="max"id="rors" name="Price 5"><input type="number" class="max amount" id="ss" readonly name="amount 5"></div>
+        <div class="fills"><input type="text" class="max" id="ron" readonly><input type="text" name="Product 6"><input type="number" class="max" id="ror" name="Qty 6"><input type="number" class="max" id="rors" name="Price 6"><input type="number" class="max amount" id="ss" readonly name="amount 6"></div>
+        <div class="fills"><input type="text" class="max" id="ron" readonly><input type="text" name="Product 7"><input type="number" class="max" id="ror" name="Qty 7"><input type="number" class="max" id="rors" name="Price 7"><input type="number" class="max amount" id="ss" readonly name="amount 7"></div>
+        <div class="fills"><input type="text" class="max" id="ron" readonly><input type="text" name="Product 8"><input type="number" class="max" id="ror" name="Qty 8"><input type="number" class="max" id="rors" name="Price 8"><input type="number" class="max amount" id="ss" readonly name="amount 8"></div>
+        <div class="fills"><input type="text" class="max" id="ron" readonly><input type="text" name="Product 9"><input type="number" class="max" id="ror" name="Qty 9"><input type="number" class="max" id="rors" name="Price 9"><input type="number" class="max amount" id="ss" readonly name="amount 9"></div>
       </div>
 
       <div class="totals">
         <div class="sub">
           <div class="day"><h2 class="strike">SubTotal</h2></div>
-          <div class="day"><h2 class="strike">GST</h2></div>
+          <div class="day">
+            <h2 class="gsts">SGST 9%</h2>
+            <h2 class="gsts">CGST 9%</h2>
+          </div>
           <input type="hidden" id="idk" name="Grand Total">
           <div class="day"><h2 class="strike" id="grand">Grand Total</h2></div>
         </div>
-        <div class="subs">
-          <div class="num"><p></p></div>
-          <div class="num"><p>18%</p></div>
-          <div class="num"><p class="grand"></p></div>
+    <div class="subs">
+        <div class="num"><p id="subtotalValue"></p></div>
+        <div class="num">
+          <p id="sgstAmount"></p>
+          <p id="cgstAmount"></p>
         </div>
+        <div class="num"><p class="grand" id="grandTotalValue"></p></div>
+    </div>
       </div>
     </div>
   </div>
-
+</div>
   <script>
-            function pad(n) {
-            return n.toString().padStart(2, '0');
-        }
+  function pad(n) {
+    return n.toString().padStart(2, '0');
+  }
 
-        function generateOrderId() {
-            const now = new Date();
-            const month = pad(now.getMonth() + 1);
-            const day = pad(now.getDate());
-            const hours = pad(now.getHours());
-            const minutes = pad(now.getMinutes());
-            const seconds = pad(now.getSeconds());
-            return `${month}${day}-${hours}${minutes}${seconds}`;
-        }
-        window.onload = function () {
+  function generateOrderId() {
+    const now = new Date();
+    const month = pad(now.getMonth() + 1);
+    const day = pad(now.getDate());
+    const hours = pad(now.getHours());
+    const minutes = pad(now.getMinutes());
+    const seconds = pad(now.getSeconds());
+    return `${month}${day}-${hours}${minutes}${seconds}`;
+  }
 
-            // Generate Order ID
-            const orderId = generateOrderId();
-            document.getElementById("orderId").value = orderId;
-            document.getElementById("ps").textContent = orderId;
-        }
+  function calculateRowAmounts() {
+    const rows = document.querySelectorAll('.fills');
+    let subtotal = 0;
 
-    function calculateRowAmounts() {
-        const rows = document.querySelectorAll('.fills');
-        let subtotal = 0;
+    rows.forEach(row => {
+      const inputs = row.querySelectorAll('input');
+      const qty = parseFloat(inputs[2]?.value || 0);
+      const price = parseFloat(inputs[3]?.value || 0);
+      const amountInput = inputs[4];
 
-        rows.forEach(row => {
-            const qty = parseFloat(row.querySelector('#ror')?.value || 0);
-            const price = parseFloat(row.querySelectorAll('input')[3]?.value || 0);
-            const amountInput = row.querySelector('.amount');
-
-            const amount = qty * price;
-            if (!isNaN(amount) && amountInput) {
-                amountInput.value = amount.toFixed(2);
-                amountInput.title = `${qty} × ${price} = ₹${amount.toFixed(2)}`;
-                subtotal += amount;
-            } else if (amountInput) {
-                amountInput.value = '';
-                amountInput.title = '';
-            }
-        });
-
-        const gst = subtotal * 0.18;
-        const grandTotal = subtotal + gst;
-
-        document.querySelectorAll('.num p')[0].textContent = subtotal.toFixed(2);
-        document.querySelector('.grand').textContent = grandTotal.toFixed(2);
-        document.getElementById('idk').value = grandTotal.toFixed(2);
-    }
-
-    // Bind listeners
-    document.querySelectorAll('.fills input').forEach(input => {
-        input.addEventListener('input', calculateRowAmounts);
+      const amount = qty * price;
+      if (!isNaN(amount)) {
+        amountInput.value = amount.toFixed(2);
+        amountInput.title = `${qty} × ${price} = ₹${amount.toFixed(2)}`;
+        subtotal += amount;
+      } else {
+        amountInput.value = '';
+        amountInput.title = '';
+      }
     });
 
-    // Run once on load
-    calculateRowAmounts();
+    const sgst = subtotal * 0.09;
+    const cgst = subtotal * 0.09;
+    const grandTotal = subtotal + sgst + cgst;
 
-    document.querySelector("button").addEventListener("click", function () {
+    document.getElementById('subtotalValue').textContent = `₹${subtotal.toFixed(2)}`;
+    document.getElementById('sgstAmount').textContent = `₹${sgst.toFixed(2)}`;
+    document.getElementById('cgstAmount').textContent = `₹${cgst.toFixed(2)}`;
+    document.getElementById('grandTotalValue').textContent = `₹${grandTotal.toFixed(2)}`;
+    document.getElementById('idk').value = grandTotal.toFixed(2);
+  }
+
+  function updateSrNos() {
+    const rows = document.querySelectorAll('.fills');
+    let srNo = 1;
+
+    rows.forEach(row => {
+      const inputs = row.querySelectorAll('input');
+      const itemDesc = inputs[1];
+      const srInput = inputs[0];
+
+      if (itemDesc.value.trim()) {
+        srInput.value = srNo++;
+      } else {
+        srInput.value = '';
+      }
+    });
+  }
+
+  window.onload = function () {
+    const orderId = generateOrderId();
+    document.getElementById("orderId").value = orderId;
+    document.getElementById("ps").textContent = orderId;
+
+    calculateRowAmounts();
+    updateSrNos();
+
+    // Add input listeners
+    document.querySelectorAll('.fills input').forEach(input => {
+      input.addEventListener('input', () => {
+        calculateRowAmounts();
+        updateSrNos();
+      });
+    });
+  };
+
+  document.querySelector("button").addEventListener("click", function () {
     const partyName = document.getElementById("ssd").value.trim();
     const gstNo = document.querySelector('input[name="GST No"]').value.trim();
     const address = document.getElementById("add").value.trim();
 
     if (!partyName || !gstNo || !address) {
-        alert("Please fill in Party Name, GST No, and Address.");
-        return;
+      alert("Please fill in Party Name, GST No, and Address.");
+      return;
     }
 
     const orderId = document.getElementById("orderId").value;
-    const grandTotal = document.getElementById("idk").value.trim(); // Ensure the correct grand total is fetched
+    const grandTotal = document.getElementById("idk").value.trim();
 
     const data = {
-        "Invoice No": orderId,
-        "Party Names": partyName,
-        "GST No": gstNo,
-        "Address": address,
-        "Grand Total": grandTotal,  // Ensure Grand Total is included in the data object
+      "Invoice No": orderId,
+      "Party Names": partyName,
+      "GST No": gstNo,
+      "Address": address,
+      "Grand Total": grandTotal,
     };
 
-    // Loop through product lines and add them to data
     const rows = document.querySelectorAll(".fills");
     for (let i = 0; i < rows.length; i++) {
-        const inputs = rows[i].querySelectorAll("input");
-        if (inputs.length >= 5) {
-            data[`Product ${i + 1}`] = inputs[1]?.value || "";
-            data[`Qty ${i + 1}`] = inputs[2]?.value || "";
-            data[`Price ${i + 1}`] = inputs[3]?.value || "";
-            data[`amount ${i + 1}`] = inputs[4]?.value || "";
-        }
+      const inputs = rows[i].querySelectorAll("input");
+      if (inputs.length >= 5) {
+        data[`Product ${i + 1}`] = inputs[1]?.value || "";
+        data[`Qty ${i + 1}`] = inputs[2]?.value || "";
+        data[`Price ${i + 1}`] = inputs[3]?.value || "";
+        data[`amount ${i + 1}`] = inputs[4]?.value || "";
+      }
     }
 
-    // Send the data to Google Apps Script
-    fetch("https://script.google.com/macros/s/AKfycbwU33EfJqoeF4TtsZgW2-itxCepP5CeZlDuvVxaeX9mE7Yk2XqZGfp6yI3Izb_52qlU/exec", {
-        method: "POST",
-        mode: "no-cors", // Needed for Google Apps Script
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+    fetch("https://script.google.com/macros/s/AKfycbznSII9e0ZU-w3lCJ9_bKySi_kGE74bdNFFG-bmlKpdmuSCTLjIxIRkjb2UihuQ1I0c/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     })
     .then(() => {
-        alert("Invoice data sent successfully!");
+      alert("Invoice data sent successfully!");
     })
     .catch((error) => {
-        console.error("Error sending data:", error);
-        alert("Failed to send invoice. Please check the console.");
+      console.error("Error sending data:", error);
+      alert("Failed to send invoice. Please check the console.");
     });
+  });
+
+ document.getElementById("downloadPDF").addEventListener("click", () => {
+  const invoice = document.querySelector('.main');
+
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(btn => btn.style.display = 'none');
+
+  const opt = {
+    margin:       0.5,
+    filename:     `${document.getElementById("orderId").value}_invoice.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().from(invoice).set(opt).save().then(() => {
+    buttons.forEach(btn => btn.style.display = '');
+
+    setTimeout(() => location.reload(), 500); 
+  });
 });
 
 
-  </script>
+
+</script>
+
 </body>
 </html>
