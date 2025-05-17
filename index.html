@@ -1,251 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Dynamic Landing Page</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f8fb;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <title>Dynamic Landing Page with Wave Effect</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        header {
-            background-image: url('https://i.imgur.com/RurqKDM.jpg');
-            color: white;
-            padding: 30px 20px;
-            background-size: cover;
-            background-position: center;
-        }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f8fb;
+      text-align: center;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-            margin: 0 0 20px 0;
-        }
+    header {
+      position: relative;
+      color: white;
+      padding: 30px 20px;
+      height: 400px;
+      overflow: hidden;
+    }
 
-        nav ul li {
-            margin: 0 15px;
-        }
+    #waves {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 12px;
-            transition: color 0.3s ease;
-            font-weight: bold;
-        }
+    header nav,
+    header img,
+    header h1,
+    header p {
+      position: relative;
+      z-index: 1;
+    }
 
-        nav ul li a:hover {
-            color: #a8dadc;
-        }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
 
-        header img {
-            width: 140px;
-            height: 140px;
-            border-radius: 100%;
-            margin-bottom: 10px;
-            transition: transform 0.3s, filter 0.3s;
-        }
+    nav ul li {
+      margin: 0 15px;
+    }
 
-        header img:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 50px rgb(73, 72, 72));
-        }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      transition: color 0.3s ease;
+      font-weight: bold;
+    }
 
-        header h1 {
-            font-size: 2.5rem;
-            margin: 10px 0;
-        }
+    nav ul li a:hover {
+      color: #a8dadc;
+    }
 
-        header p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
+    header img {
+      width: 140px;
+      height: 140px;
+      border-radius: 100%;
+      margin-bottom: 10px;
+      transition: transform 0.3s, filter 0.3s;
+    }
 
-        .features {
-            display: flex;
-            justify-content: center;
-            padding: 30px;
-            gap: 20px;
-        }
+    header img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 50px rgb(73, 72, 72));
+    }
 
-        .feature {
-            flex: 1;
-            max-width: 300px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 10px 0;
+    }
 
-        .feature:hover {
-            transform: scale(1.05);
-            box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.2);
-        }
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
 
-        .feature h2 {
-            color: #007bff;
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
+    .features {
+      display: flex;
+      justify-content: center;
+      padding: 30px;
+      gap: 20px;
+    }
 
-        .feature p {
-            color: #444;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
+    .feature {
+      flex: 1;
+      max-width: 300px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .top {
-            margin: 40px auto;
-            padding: 20px;
-            height: 480px;
-            width: 96%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            background: linear-gradient(to right, #f4f4f4, #ddeeff);
-            border-radius: 20px;
-        }
+    .feature:hover {
+      transform: scale(1.05);
+      box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.2);
+    }
 
-        .arrow {
-            cursor: pointer;
-            height: 60px;
-            opacity: 0.8;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    .feature h2 {
+      color: #007bff;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
 
-        .arrow:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            transform: rotate(180deg);
-        }
+    .feature p {
+      color: #444;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
 
-        .right {
-            transform: rotate(180deg);
-        }
+    .top {
+      margin: 40px auto;
+      padding: 20px;
+      height: 480px;
+      width: 96%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      background: linear-gradient(to right, #f4f4f4, #ddeeff);
+      border-radius: 20px;
+    }
 
-        .frame {
-            width: 40%;
-            height: 90%;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
+    .arrow {
+      cursor: pointer;
+      height: 60px;
+      opacity: 0.8;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-        .slider {
-            display: flex;
-            transition: transform 0.8s ease-in-out;
-        }
+    .arrow:hover {
+      transform: scale(1.1) rotate(180deg);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
 
-        .images {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+    .right {
+      transform: rotate(180deg);
+    }
 
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
-        }
-    </style>
+    .frame {
+      width: 40%;
+      height: 90%;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .images {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 40px;
+    }
+    
+    .shiny-text {
+      font-size: 2.5rem;
+      margin: 10px 0;
+      color: #b5b5b5a4;
+      background: linear-gradient(
+        90deg,
+        rgb(255, 17, 17) 50%,
+        rgb(17, 41, 255) 50%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shine 7s linear infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        background-position: 100%;
+      }
+      100% {
+        background-position: -100%;
+      }
+    }
+
+    .shiny-text.disabled {
+      animation: none;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="./project 3.html">Shopping</a></li>
-                <li><a href="./project 1.html">About Me</a></li>
-                <li><a href="./Survey Form.html">Registration</a></li>
-                <li><a href="./Order ID.html">Order Id</a></li>
-                <li><a href="./Track.html">Product Details</a></li>
-            </ul>
-        </nav>
-        <img src="./NSQ/logo.jpg" alt="Logo">
-        <h1>Welcome To N Square Computers</h1>
-        <p>Computer & Laptop Repairing Shop & CCTV Installation Service.</p>
-    </header>
+<header>
+  <canvas id="waves"></canvas>
+  <nav>
+    <ul>
+      <li><a href="./project 3.html">Shopping</a></li>
+      <li><a href="./project 1.html">About Me</a></li>
+      <li><a href="./Survey Form.html">Registration</a></li>
+      <li><a href="./Order ID.html">Order Id</a></li>
+      <li><a href="./Track.html">Product Details</a></li>
+    </ul>
+  </nav>
+  <img src="./NSQ/logo.jpg" alt="Logo">
+  <h1 class="shiny-text">Welcome To N Square Computers</h1>
+  <p>Computer & Laptop Repairing Shop & CCTV Installation Service.</p>
+</header>
 
-    <section class="features">
-        <div class="feature">
-            <h2>Feature One</h2>
-            <p>We offer expert computer and laptop repair services with a quick turnaround and trusted support.</p>
-        </div>
-        <div class="feature">
-            <h2>Feature Two</h2>
-            <p>Secure and professional CCTV installation for homes and businesses with modern systems.</p>
-        </div>
-        <div class="feature">
-            <h2>Feature Three</h2>
-            <p>Custom-built PCs, networking solutions, and annual maintenance contracts tailored to your needs.</p>
-        </div>
-    </section>
+<section class="features">
+  <div class="feature">
+    <h2>Feature One</h2>
+    <p>We offer expert computer and laptop repair services with a quick turnaround and trusted support.</p>
+  </div>
+  <div class="feature">
+    <h2>Feature Two</h2>
+    <p>Secure and professional CCTV installation for homes and businesses with modern systems.</p>
+  </div>
+  <div class="feature">
+    <h2>Feature Three</h2>
+    <p>Custom-built PCs, networking solutions, and annual maintenance contracts tailored to your needs.</p>
+  </div>
+</section>
 
-    <div class="top">
-        <img src="./Images/arrow.jpeg" class="arrow left" alt="Left Arrow">
-        <div class="frame">
-            <div class="slider">
-                <img class="images" src="./Images/image 1.jpg" alt="Image 1">
-                <img class="images" src="./Images/image 3.jpg" alt="Image 2">
-                <img class="images" src="./Images/image 4.jpg" alt="Image 3">
-            </div>
-        </div>
-        <img src="./Images/arrow.jpeg" class="arrow right" alt="Right Arrow">
+<div class="top">
+  <img src="./Images/arrow.jpeg" class="arrow left" alt="Left Arrow">
+  <div class="frame">
+    <div class="slider">
+      <img class="images" src="./Images/image 1.jpg" alt="Image 1">
+      <img class="images" src="./Images/image 3.jpg" alt="Image 2">
+      <img class="images" src="./Images/image 4.jpg" alt="Image 3">
     </div>
+  </div>
+  <img src="./Images/arrow.jpeg" class="arrow right" alt="Right Arrow">
+</div>
 
-    <footer>
-       <marquee><h3>This Site Created By Sunandan Naresh Madam. Studying in sinhgad spring dale public school vadgaon pune 8th </h3></marquee>
-    <marquee><h3>All Rights reserved by Sunandan Naresh Madam</h3></marquee>
-    </footer>
+<footer>
+  <marquee><h3>This Site Created By Sunandan Naresh Madam. Studying in Sinhgad Spring Dale Public School, Vadgaon Pune - 8th</h3></marquee>
+  <marquee><h3>All Rights reserved by Sunandan Naresh Madam</h3></marquee>
+</footer>
 
-    <script>
-        const left = document.querySelector(".left");
-        const right = document.querySelector(".right");
-        const slider = document.querySelector(".slider");
-        const images = document.querySelectorAll(".images");
+<script>
+  // Wave Effect Script
+  class Grad {
+    constructor(x, y, z) { this.x = x; this.y = y; this.z = z; }
+    dot2(x, y) { return this.x * x + this.y * y; }
+  }
 
-        let slides = 1;
-        const length = images.length;
+  class Noise {
+    constructor() {
+      this.grad3 = [new Grad(1, 1, 0), new Grad(-1, 1, 0), new Grad(1, -1, 0), new Grad(-1, -1, 0),
+                    new Grad(1, 0, 1), new Grad(-1, 0, 1), new Grad(1, 0, -1), new Grad(-1, 0, -1),
+                    new Grad(0, 1, 1), new Grad(0, -1, 1), new Grad(0, 1, -1), new Grad(0, -1, -1)];
+      this.p = Array.from({length: 256}, () => Math.floor(Math.random() * 256));
+      this.perm = Array.from({length: 512}, (_, i) => this.p[i & 255]);
+      this.gradP = Array.from({length: 512}, (_, i) => this.grad3[this.perm[i] % 12]);
+    }
 
-        const nextslide = function () {
-            slider.style.transform = `translateX(-${slides * 100}%)`;
-            slides++;
-        }
+    fade(t) { return t * t * t * (t * (t * 6 - 15) + 10); }
+    lerp(a, b, t) { return (1 - t) * a + t * b; }
 
-        const prevslide = function () {
-            slider.style.transform = `translateX(-${(slides - 2) * 100}%)`;
-            slides--;
-        }
+    perlin2(x, y) {
+      let X = Math.floor(x), Y = Math.floor(y);
+      x -= X; y -= Y; X &= 255; Y &= 255;
+      let n00 = this.gradP[X + this.perm[Y]].dot2(x, y);
+      let n01 = this.gradP[X + this.perm[Y + 1]].dot2(x, y - 1);
+      let n10 = this.gradP[X + 1 + this.perm[Y]].dot2(x - 1, y);
+      let n11 = this.gradP[X + 1 + this.perm[Y + 1]].dot2(x - 1, y - 1);
+      let u = this.fade(x), v = this.fade(y);
+      return this.lerp(this.lerp(n00, n10, u), this.lerp(n01, n11, u), v);
+    }
+  }
 
-        const getfirstslide = function () {
-            slider.style.transform = `translateX(0%)`;
-            slides = 1;
-        }
+  const canvas = document.getElementById('waves');
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = canvas.offsetWidth;
+  let height = canvas.height = canvas.offsetHeight;
 
-        const getlastslide = function () {
-            slider.style.transform = `translateX(-${(length - 1) * 100}%)`;
-            slides = length;
-        }
+  const noise = new Noise();
+  const gridX = 30, gridY = 20;
+  const spacingX = width / gridX, spacingY = height / gridY;
+  let points = [];
 
-        right.addEventListener("click", function () {
-            slides < images.length ? nextslide() : getfirstslide();
-        });
+  for (let i = 0; i <= gridX; i++) {
+    for (let j = 0; j <= gridY; j++) {
+      points.push({ x: i * spacingX, y: j * spacingY, offsetX: 0, offsetY: 0, vx: 0, vy: 0 });
+    }
+  }
 
-        left.addEventListener("click", function () {
-            slides > 1 ? prevslide() : getlastslide();
-        });
-    </script>
+  let mouse = { x: -1000, y: -1000, lx: 0, ly: 0, speed: 0 };
+  canvas.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  function animate(time) {
+    ctx.fillStyle = "#002244";
+    ctx.fillRect(0, 0, width, height);
+    ctx.strokeStyle = '#66ffff';
+    ctx.lineWidth = 1;
+
+    let dx = mouse.x - mouse.lx;
+    let dy = mouse.y - mouse.ly;
+    mouse.speed = Math.hypot(dx, dy);
+    mouse.lx = mouse.x;
+    mouse.ly = mouse.y;
+
+    points.forEach(p => {
+      let dist = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+      let force = Math.max(0, 150 - dist) / 150;
+      let angle = Math.atan2(p.y - mouse.y, p.x - mouse.x);
+      p.vx += Math.cos(angle) * force * mouse.speed * 0.05;
+      p.vy += Math.sin(angle) * force * mouse.speed * 0.05;
+
+      let n = noise.perlin2(p.x * 0.005 + time * 0.0003, p.y * 0.005 + time * 0.0002);
+      let waveX = Math.cos(n * Math.PI * 2) * 10;
+      let waveY = Math.sin(n * Math.PI * 2) * 10;
+
+      p.vx *= 0.9; p.vy *= 0.9;
+      p.offsetX += p.vx; p.offsetY += p.vy;
+
+      let x = p.x + p.offsetX + waveX;
+      let y = p.y + p.offsetY + waveY;
+
+      ctx.beginPath();
+      ctx.arc(x, y, 1.2, 0, Math.PI * 2);
+      ctx.stroke();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = canvas.offsetWidth;
+    height = canvas.height = canvas.offsetHeight;
+  });
+
+  // Slider functionality
+  const left = document.querySelector(".left");
+  const right = document.querySelector(".right");
+  const slider = document.querySelector(".slider");
+  const images = document.querySelectorAll(".images");
+
+  let slides = 1;
+  const length = images.length;
+
+  const nextslide = () => {
+    slider.style.transform = `translateX(-${slides * 100}%)`;
+    slides++;
+  }
+
+  const prevslide = () => {
+    slider.style.transform = `translateX(-${(slides - 2) * 100}%)`;
+    slides--;
+  }
+
+  const getfirstslide = () => {
+    slider.style.transform = `translateX(0%)`;
+    slides = 1;
+  }
+
+  const getlastslide = () => {
+    slider.style.transform = `translateX(-${(length - 1) * 100}%)`;
+    slides = length;
+  }
+
+  right.addEventListener("click", () => {
+    slides < images.length ? nextslide() : getfirstslide();
+  });
+
+  left.addEventListener("click", () => {
+    slides > 1 ? prevslide() : getlastslide();
+  });
+</script>
 
 </body>
 </html>
