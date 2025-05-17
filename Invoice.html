@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invoice</title>
+  <style>
+    * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+.outer {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.main {
+  border: 1px solid #000;
+  padding: 16px;
+  background: #fff;
+}
+.first {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ecebeb;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+.number {
+  display: flex;
+}
+h3 {
+  margin-bottom: 5px;
+}
+.ns {
+  flex: 1;
+  text-align: center;
+}
+#orderId {
+  height: 22px;
+  width: 150px;
+  margin-left: 5px;
+  border: 0px;
+  background-color: orange;
+  color: white;
+}
+
+.date {
+  background-color: orange;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 45px 0 0 45px;
+  width: 300px;
+  text-align: center;
+}
+h1 {
+  font-size: 75px;
+  color: orange;
+}
+h2{
+  color: orange;
+  font-size: 18px;
+}
+#service {
+  color: green;
+}
+#circle {
+  margin-top: -10px;
+  color: green;
+}
+#cpu {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+#dates {
+  margin-top: 5px;
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 8px;
+  border: none; 
+  color: white;
+  background-color: orange;
+  font-size: 16px;
+}
+
+/* Party Info */
+.second {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.party {
+  flex: 1 1 200px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#add {
+  flex: 2 1 400px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Table Headers */
+.head {
+  display: grid;
+  grid-template-columns: 50px 1fr 150px 80px 100px;
+  background-color: #dcdada;
+  text-align: center;
+  padding: 8px;
+  margin-top: 30px;
+}
+
+/* Data Rows */
+.fills {
+  display: grid;
+  grid-template-columns: 50px 1fr 150px 80px 100px;
+  gap: 5px;
+  padding: 5px 0;
+}
+
+.fills input,
+.fills select {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+/* Totals */
+.totals {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10pxs;
+  flex-wrap: wrap;
+}
+
+.sub {
+  flex: 1 1 300px;
+  width: 70px;
+}
+
+.subs {
+  flex: 0 0 250px;
+}
+
+.day {
+  padding: 10px;
+  border: 0px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.num {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: right;
+  display: flex;
+}
+
+.strike {
+  margin-right: 5px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.grand {
+  color: orangered;
+  font-weight: bold;
+}
+
+.word {
+  width: 100%;
+  margin-bottom: 10px;
+}
+#stamp {
+  margin-left: -25px;
+}
+.details {
+  margin-top: 10px;
+  border: 0px solid black;
+  height: 45px;
+  background: linear-gradient(45deg, orangered, orange);
+  color: white;
+  font-size: 17px;
+  display: flex;
+  text-align: center;
+}
+@media print {
+  button {
+    display: none;
+  }
+
+  body {
+    background: white;
+  }
+}
+
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="outer">
+    <div class="main">
+      <div class="first">
+        <div class="logo">
+        <h1>N</h1>
+        <h4 id="circle">Square</h4>
+        </div>
+        <div class="ns">
+          <h2>NSQUARE COMPUTERS</h2>
+          <h3 id="service">Sales & Services</h3>
+          <h4>GST NO:  27AAGFN4879G1ZU</h4>
+        </div>
+        <div class="date">
+          <h3>TAX INVOICE</h3>
+          <div class="number">
+          <p><strong>Invoice No:-</strong></p>
+          <input type="text" id="orderId" name="Invoice No">
+          </div>
+          <div class="number">
+          <p id="cpu"><strong>Date:-</strong></p>
+          <input type="date" id="dates">
+          </div>
+        </div>
+      </div>
+
+      <div class="second">
+        <input type="text" placeholder="Party Name" class="party" id="ssd" required name="Party Names">
+        <input type="text" placeholder="GST No" class="party" required name="GST No">
+        <input type="text" placeholder="Address" class="party" id="add" required name="Address">
+        <button>Save Invoice</button>
+        <button id="downloadPDF">Download PDF</button>
+      </div>
+
+      <div class="third">
+        <div class="head">
+          <div><h3>No.</h3></div>
+          <div><h3>Item Description</h3></div>
+          <div><h3>Qty / Unit</h3></div>
+          <div><h3>Price</h3></div>
+          <div><h3>Amount</h3></div>
+        </div>
+
+
+        <div class="fills">
+          <input type="text" readonly>
+          <input type="text" id="sun" name="data[Product 1]">
+          <div style="display: flex; gap: 5px;">
+            <input type="number" id="earth" name="data[Qty 1]" style="flex: 1;">
+            <select name="data[Unit 1]" style="width: 70px;">
+              <option value="NOS">NOS</option>
+              <option value="KG">KG</option>
+              <option value="MTR">MTR</option>
+            </select>
+          </div>
+          <input type="number" id="moon" name="data[Price 1]">  
+          <input type="number" readonly name="data[Amount 1]">
+        </div>
+
+        <div class="fills">
+          <input type="text" readonly>
+          <input type="text" name="Product 2">
+          <div style="display: flex; gap: 5px;">
+            <input type="number" name="Qty 2" style="flex: 1;">
+            <select name="Unit 2" style="width: 70px;">
+              <option value="NOS">NOS</option>
+              <option value="KG">KG</option>
+              <option value="MTR">MTR</option>
+            </select>
+          </div>
+          <input type="number" name="Price 2">
+          <input type="number" readonly name="Amount 2">
+        </div>
+
+        <div class="fills">
+          <input type="text" readonly>
+          <input type="text" name="Product 3">
+          <div style="display: flex; gap: 5px;">
+            <input type="number" name="Qty 3" style="flex: 1;">
+            <select name="Unit 3" style="width: 70px;">
+              <option value="NOS">NOS</option>
+              <option value="KG">KG</option>
+              <option value="MTR">MTR</option>
+            </select>
+          </div>
+          <input type="number" name="Price 3">
+          <input type="number" readonly name="Amount 3">
+        </div>
+
+                <div class="fills">
+          <input type="text" readonly>
+          <input type="text" name="Product 4">
+          <div style="display: flex; gap: 5px;">
+            <input type="number" name="Qty 4" style="flex: 1;">
+            <select name="Unit 4" style="width: 70px;">
+              <option value="NOS">NOS</option>
+              <option value="KG">KG</option>
+              <option value="MTR">MTR</option>
+            </select>
+          </div>
+          <input type="number" name="Price 4">
+          <input type="number" readonly name="Amount 4">
+        </div>
+
+                <div class="fills">
+          <input type="text" readonly>
+          <input type="text" name="Product 5">
+          <div style="display: flex; gap: 5px;">
+            <input type="number" name="Qty 5" style="flex: 1;">
+            <select name="Unit 5" style="width: 70px;">
+              <option value="NOS">NOS</option>
+              <option value="KG">KG</option>
+              <option value="MTR">MTR</option>
+            </select>
+          </div>
+          <input type="number" name="Price 5">
+          <input type="number" readonly name="Amount 5">
+        </div>
+
+                <div class="fills">
+          <input type="text" readonly>
+          <input type="text" name="Product 6">
+          <div style="display: flex; gap: 5px;">
+            <input type="number" name="Qty 6" style="flex: 1;">
+            <select name="Unit 6" style="width: 70px;">
+              <option value="NOS">NOS</option>
+              <option value="KG">KG</option>
+              <option value="MTR">MTR</option>
+            </select>
+          </div>
+          <input type="number" name="Price 6">
+          <input type="number" readonly name="Amount 6">
+        </div>
+
+                <div class="fills">
+          <input type="text" readonly>
+          <input type="text" name="Product 7">
+          <div style="display: flex; gap: 5px;">
+            <input type="number" name="Qty 7" style="flex: 1;">
+            <select name="Unit 7" style="width: 70px;">
+              <option value="NOS">NOS</option>
+              <option value="KG">KG</option>
+              <option value="MTR">MTR</option>
+            </select>
+          </div>
+          <input type="number" name="Price 7">
+          <input type="number" readonly name="Amount 7">
+        </div>
+
+                <div class="fills">
+          <input type="text" readonly>
+          <input type="text" name="Product 8">
+          <div style="display: flex; gap: 5px;">
+            <input type="number" name="Qty 8" style="flex: 1;">
+            <select name="Unit 8" style="width: 70px;">
+              <option value="NOS">NOS</option>
+              <option value="KG">KG</option>
+              <option value="MTR">MTR</option>
+            </select>
+          </div>
+          <input type="number" name="Price 8">
+          <input type="number" readonly name="Amount 8">
+        </div>
+
+                <div class="fills">
+          <input type="text" readonly>
+          <input type="text" name="Product 9">
+          <div style="display: flex; gap: 5px;">
+            <input type="number" name="Qty 9" style="flex: 1;">
+            <select name="Unit 9" style="width: 70px;">
+              <option value="NOS">NOS</option>
+              <option value="KG">KG</option>
+              <option value="MTR">MTR</option>
+            </select>
+          </div>
+          <input type="number" name="Price 9">
+          <input type="number" readonly name="Amount 9">
+        </div>
+
+      </div>
+
+      <div class="totals">
+        <div class="word">
+          <div class="Words"><p id="grandWords" style="font-weight:bold; margin-top:5px;"></p></div>
+        </div>
+          <div class="day">
+            <h3>Company's Bank Details</h3>
+            <h4>Bank :CANARA BANK</h4>
+            <h4>A/c No. :1882201001310</h4>
+            <h4>IFS Code: CNRB0001882</h4>
+            <h4>Branch :Bibwevadi </h4>
+          </div>
+        <div class="subs">
+          <div class="num">
+          <h2 class="strike">SubTotal:- </h2>
+            <p id="subtotalValue"></p>
+          </div>
+          <div class="num">
+            <h2 class="strike">SGST 9%:- </h2>
+            <p id="sgstAmount"></p>
+            </div>
+            <div class="num">
+              <input type="hidden" id="idk" name="Grand Total">
+              <h2 class="strike">CGST 9%:- </h2>
+            <p id="cgstAmount"></p>
+          </div>
+          <div class="num">
+            <h2 class="strike" id="grand">Grand Total:- </h2>
+            <p class="grand" id="grandTotalValue"></p>
+          </div>
+        </div>
+      </div>
+         <div class="details">
+          <h5>Survey No. 8/2/1, Thakkers Green Hills Co Op Society Wing A1 Flat No 26 Ambegaon Bk (Dhabadi), Pune 411046, Mobile No. 9372893976/9579893976, nsquarecomputer@gmail.com</h5>
+        </div>
+    </div>
+  </div>
+
+<script>
+  function pad(n) {
+  return n.toString().padStart(2, '0');
+}
+
+
+function numberToWords(num) {
+  const a = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", 
+             "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", 
+             "Seventeen", "Eighteen", "Nineteen"];
+  const b = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+
+  function inWords(n) {
+    if (n < 20) return a[n];
+    if (n < 100) return b[Math.floor(n / 10)] + (n % 10 ? " " + a[n % 10] : "");
+    if (n < 1000) return a[Math.floor(n / 100)] + " Hundred" + (n % 100 ? " and " + inWords(n % 100) : "");
+    if (n < 100000) return inWords(Math.floor(n / 1000)) + " Thousand" + (n % 1000 ? " " + inWords(n % 1000) : "");
+    if (n < 10000000) return inWords(Math.floor(n / 100000)) + " Lakh" + (n % 100000 ? " " + inWords(n % 100000) : "");
+    return "Number too large";
+  }
+
+  return num === 0 ? "Zero" : inWords(num);
+}
+
+function calculateRowAmounts() {
+  const rows = document.querySelectorAll('.fills');
+  let subtotal = 0;
+
+  rows.forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const qty = parseFloat(inputs[2]?.value || 0);
+    const price = parseFloat(inputs[3]?.value || 0);
+    const amountInput = inputs[4];
+
+    const amount = qty * price;
+    if (!isNaN(amount) && amount !== 0) {
+      amountInput.value = amount.toFixed(2);
+      amountInput.title = `${qty} × ${price} = ₹${amount.toFixed(2)}`;
+      subtotal += amount;
+    } else {
+      amountInput.value = '';
+      amountInput.title = '';
+    }
+  });
+
+  const sgst = subtotal * 0.09;
+  const cgst = subtotal * 0.09;
+  const grandTotal = subtotal + sgst + cgst;
+
+  document.getElementById('subtotalValue').textContent = `₹${subtotal.toFixed(2)}`;
+  document.getElementById('sgstAmount').textContent =`₹${sgst.toFixed(2)}`;
+  document.getElementById('cgstAmount').textContent = `₹${cgst.toFixed(2)}`;
+  document.getElementById('grandTotalValue').textContent = `₹${grandTotal.toFixed(2)}`;
+  document.getElementById('idk').value = grandTotal.toFixed(2);
+
+  // Show grand total in words
+  const words = numberToWords(Math.round(grandTotal));
+  document.getElementById('grandWords').textContent = `Amount in Words: ${words} Only`;
+}
+
+function updateSrNos() {
+  const rows = document.querySelectorAll('.fills');
+  let srNo = 1;
+
+  rows.forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const itemDesc = inputs[1];
+    const srInput = inputs[0];
+
+    if (itemDesc.value.trim()) {
+      srInput.value = srNo++;
+    } else {
+      srInput.value = '';
+    }
+  });
+}
+
+window.onload = function () {
+
+  calculateRowAmounts();
+  updateSrNos();
+
+  document.querySelectorAll('.fills input').forEach(input => {
+    input.addEventListener('input', () => {
+      calculateRowAmounts();
+      updateSrNos();
+    });
+  });
+};
+
+document.querySelector("button").addEventListener("click", function () {
+  const partyName = document.getElementById("ssd").value.trim();
+  const gstNo = document.querySelector('input[name="GST No"]').value.trim();
+  const address = document.getElementById("add").value.trim();
+ const ids = document.getElementById("orderId").value.trim();
+ const items = document.getElementById("sun").value.trim();
+ const qtys = document.getElementById("earth").value.trim();
+ const prices = document.getElementById("moon").value.trim();
+  if (!partyName || !gstNo || !address || !ids || !items || !qtys || !prices) {
+    alert("Please fill in Party Name, GST No, Address, Invoice No And At Least One Product.");
+    return;
+  }
+
+  const orderId = document.getElementById("orderId").value;
+  const grandTotal = document.getElementById("idk").value.trim();
+
+  const data = {
+    "Invoice No": orderId,
+    "Party Names": partyName,
+    "GST No": gstNo,
+    "Address": address,
+    "Grand Total": grandTotal,
+  };
+
+  const rows = document.querySelectorAll(".fills");
+  for (let i = 0; i < rows.length; i++) {
+    const inputs = rows[i].querySelectorAll("input");
+    if (inputs.length >= 5) {
+      data[`Product ${i + 1}`] = inputs[1]?.value || "";
+      data[`Qty ${i + 1}`] = inputs[2]?.value || ""; 
+      data[`Price ${i + 1}`] = inputs[3]?.value || "";
+      data[`amount ${i + 1}`] = inputs[4]?.value || "";
+    }
+  } 
+
+  fetch("https://script.google.com/macros/s/AKfycbyi9sIA3P9FiOuOU6KJPxbwn4zsKWE62sNgHJdzGBblXSyeB9ztVCS3BgTf6qdPObiWgQ/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+  .then(() => {
+    alert("Invoice data sent successfully!");
+  })
+  .catch((error) => {
+    console.error("Error sending data:", error);
+    alert("Failed to send invoice. Please check the console.");
+  });
+});
+
+document.getElementById("downloadPDF").addEventListener("click", () => {
+  const invoice = document.querySelector('.main');
+
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(btn => btn.style.display = 'none');
+
+  const opt = {
+    margin:       0.5,
+    filename:     `N-Square_invoice.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().from(invoice).set(opt).save().then(() => {
+    buttons.forEach(btn => btn.style.display = '');
+    setTimeout(() => location.reload(), 500);
+  });
+})
+</script>
+
+</body>
+</html>
