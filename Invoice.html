@@ -64,16 +64,16 @@ h3 {
   width: 300px;
   text-align: center;
 }
-h1 {
-  font-size: 75px;
-  color: orange;
-}
 h2{
   color: orange;
   font-size: 18px;
 }
+.ns, h4 {
+  font-size: 17px;
+}
 #service {
   color: green;
+  font-size: 17px;
 }
 #circle {
   margin-top: -10px;
@@ -189,7 +189,26 @@ button {
   color: orangered;
   font-weight: bold;
 }
+   #text-container {
+      font-size: 20px;
+      font-weight: bold;
+      font-family: sans-serif;
+      color: orange;
+    }
 
+    .letter {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 .word {
   width: 100%;
   margin-bottom: 10px;
@@ -207,6 +226,34 @@ button {
   display: flex;
   text-align: center;
 }
+    .shiny-text {
+      font-size: 70px;
+      color: #b5b5b5a4;
+      background: linear-gradient(
+        120deg,
+        rgb(255, 17, 17) 40%,
+        orange 60%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      animation: shine 3s linear infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        background-position: 100%;
+      }
+      100% {
+        background-position: -100%;
+      }
+    }
+
+    .shiny-text.disabled {
+      animation: none;
+    }
 @media print {
   button {
     display: none;
@@ -225,11 +272,11 @@ button {
     <div class="main">
       <div class="first">
         <div class="logo">
-        <h1>N</h1>
+        <h1 class="shiny-text">N</h1>
         <h4 id="circle">Square</h4>
         </div>
         <div class="ns">
-          <h2>NSQUARE COMPUTERS</h2>
+          <div id="text-container"></div>
           <h3 id="service">Sales & Services</h3>
           <h4>GST NO:  27AAGFN4879G1ZU</h4>
         </div>
@@ -439,6 +486,17 @@ button {
   </div>
 
 <script>
+  const text = "Nsquare Computers";
+    const container = document.getElementById('text-container');
+
+    text.split('').forEach((char, index) => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.classList.add('letter');
+      span.style.animationDelay = `${index * 0.3}s`;
+      container.appendChild(span);
+    });
+
   function pad(n) {
   return n.toString().padStart(2, '0');
 }
